@@ -1,4 +1,5 @@
 <script>
+	import Aside from '$lib/components/Aside.svelte';
 	let { data } = $props();
 	let item = $derived(data.item);
 	let info = $derived(item.name === item.info);
@@ -12,8 +13,11 @@
 </svelte:head>
 
 <h1 class="text-center">{item.name}</h1>
-{#if !info }
-	<p class="text-center lead">{item.info}</p>
-{:else}
-	<p>Keine weitere Information vorhanden</p>
-{/if}
+<p class="text-center lead">
+	{#if !info }
+		{item.info}
+	{:else}
+		Keine weitere Information vorhanden
+		{/if}
+	</p>
+<Aside corpusData={data.corpusData} currentName={item.name} />
