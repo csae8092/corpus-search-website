@@ -1,8 +1,10 @@
+import { fetchCorpusData } from '$lib/corpus';
+
 export const prerender = true;
 
-import corpusData from '$lib/data/corpus-data.json';
-
-export function load() {
+export async function load() {
+	const corpusData = await fetchCorpusData();
+	
 	return {
 		corpusData
 	};

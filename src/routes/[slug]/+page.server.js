@@ -1,13 +1,9 @@
 import { error } from '@sveltejs/kit';
-import corpusData from '$lib/data/corpus-data.json';
+import { fetchCorpusData } from '$lib/corpus';
 
-export function entries() {
-	return corpusData.map((item) => ({
-		slug: item.name
-	}));
-}
 
-export function load({ params }) {
+export async function load({ params, parent }) {
+	const { corpusData } = await parent();
 	const item = corpusData.find((item) => item.name === params.slug);
 
 	if (!item) error(404);

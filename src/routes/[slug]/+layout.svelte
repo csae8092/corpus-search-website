@@ -2,8 +2,9 @@
 	let { data, children } = $props();
 </script>
 
-<div class="layout">
-	<main>
+
+<main>
+	<div class="container">
 		{@render children()}
-	</main>
-</div>
+	</div>
+</main>

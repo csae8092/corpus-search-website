@@ -10,6 +10,7 @@
 </script>
 
 <svelte:head>
+	<title>Corpus Search</title>
 	<link rel="icon" href={favicon} />
 </svelte:head>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
