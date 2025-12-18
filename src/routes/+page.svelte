@@ -1,4 +1,5 @@
 <script>
+	import { base } from '$app/paths';
 	let { data } = $props();
 </script>
 
@@ -7,7 +8,7 @@
 	<ul>
 		{#each data.corpusData as x}
 			<li>
-				<a href="/{x.name}">{x.name}</a>
+				<a href="{base}/{x.name}">{x.name}</a>
 			</li>
 		{/each}
 	</ul>
