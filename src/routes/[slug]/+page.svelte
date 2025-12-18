@@ -13,7 +13,7 @@
 
 <h1 class="text-center">{item.name}</h1>
 {#if !info }
-	<p>{item.info}</p>
+	<p class="text-center lead">{item.info}</p>
 {:else}
 	<p>Keine weitere Information vorhanden</p>
 {/if}
