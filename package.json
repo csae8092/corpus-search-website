@@ -24,7 +24,7 @@
 	"dependencies": {
 		"@highcharts/svelte": "^1.1.1",
 		"@popperjs/core": "^2.11.8",
-		"acdh-noske-search": "^0.0.5",
+		"acdh-noske-search": "^0.2.3",
 		"bootstrap": "5.3",
 		"highcharts": "^12.4.0",
 		"lorem-ipsum": "^2.0.8"
