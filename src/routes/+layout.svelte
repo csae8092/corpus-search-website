@@ -3,11 +3,12 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import 'bootstrap/dist/css/bootstrap.min.css';
 	import '../styles/style.css';
+	import CorpusNav from '$lib/components/CorpusNav.svelte';
 
 	if (typeof window !== 'undefined') {
 		import('bootstrap');
 	}
-	let { children } = $props();
+	let { data, children } = $props();
 </script>
 
 <svelte:head>
@@ -16,7 +17,7 @@
 </svelte:head>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="{base}/">Navbar</a>
+		<a class="navbar-brand" href="{base}/">Home</a>
 		<button
 			class="navbar-toggler"
 			type="button"
@@ -30,12 +31,6 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="{base}/">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{base}/">Link</a>
-				</li>
 				<li class="nav-item dropdown">
 					<a
 						class="nav-link dropdown-toggle"
@@ -44,25 +39,26 @@
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
 					>
-						Dropdown
+						Corpora
 					</a>
-					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="{base}/">Action</a></li>
-						<li><a class="dropdown-item" href="{base}/">Another action</a></li>
-						<li><hr class="dropdown-divider" /></li>
-						<li><a class="dropdown-item" href="{base}/">Something else here</a></li>
-					</ul>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link disabled" aria-disabled="true">Disabled</a>
+					<CorpusNav corpusData={data.corpusData} />
 				</li>
 			</ul>
-			<form class="d-flex" role="search">
+			<!-- <form class="d-flex" role="search">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
 				<button class="btn btn-outline-success" type="submit">Search</button>
-			</form>
+			</form> -->
 		</div>
 	</div>
 </nav>
-
-{@render children()}
+<main class="flex-shrink-0 flex-grow-1">
+	<div class="container">
+		{@render children()}
+	</div>
+</main>
+<footer class="bg-light pt-3 pb-2">
+	<p class="text-center text-body-secondary">
+		<a href="{base}/imprint">Imprint</a> |
+		<a href="https://github.com/csae8092/corpus-search-website">CodeRepo</a>
+	</p>
+</footer>
