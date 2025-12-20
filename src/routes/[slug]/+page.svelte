@@ -3,6 +3,8 @@
 	import Aside from '$lib/components/Aside.svelte';
 	import { loremIpsum } from 'lorem-ipsum';
 	import { NoskeSearch } from 'acdh-noske-search';
+	import { base } from '$app/paths';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 	let item = $derived(data.item);
@@ -21,15 +23,6 @@
 	let search;
 
 	function initializeSearch() {
-		// Clear all containers
-		const containers = ['noskeDiv', 'hitsBox', 'noskePagination', 'noskeStats'];
-		containers.forEach((id) => {
-			const element = document.getElementById(id);
-			if (element) {
-				element.innerHTML = '';
-			}
-		});
-
 		search = new NoskeSearch({
 			container: 'noskeDiv',
 			autocomplete: false,
@@ -42,9 +35,8 @@
 			client: {
 				base: 'https://corpus-search.acdh.oeaw.ac.at/',
 				corpname: corpusName,
-				attrs: 'word,lemma,pos,landingPageURI',
-				structs: 'sen',
-				refs: 'doc.id,doc.title'
+				attrs: 'word,landingPageURI',
+				structs: 'sen'
 			},
 			hits: {
 				id: 'hitsBox',
@@ -69,8 +61,8 @@
 			config: {
 				tableView: true,
 				customUrlTransform: function (lines) {
-					let kwic_attr = lines.kwic_attr?.split('/');
-					let backlink = kwic_attr[kwic_attr.length - 1];
+					let kwic_attr = lines.kwic_attr?.split('http')[1];
+					let backlink = `http${kwic_attr}`;
 					return backlink;
 				}
 			},
@@ -79,11 +71,13 @@
 			}
 		});
 	}
-
+	function resetSearch() {
+		const currentPath = base ? `${base}/${corpusName}` : `/${corpusName}`;
+		window.location.href = currentPath;
+	}
 	onMount(() => {
 		initializeSearch();
 	});
-
 	$effect(() => {
 		if (corpusName && search) {
 			initializeSearch();
@@ -103,6 +97,9 @@
 	</div>
 	<div class="col-md-10">
 		<div id="noskeDiv"></div>
+		<div class="text-center p-2" id="reset-button">
+			<button id="noskeReset" class="btn btn-primary" onclick={resetSearch}>Reset</button>
+		</div>
 		<div id="hitsBox"></div>
 		<div class="mx-auto">
 			<div id="noskePagination"></div>
